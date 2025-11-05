@@ -1,98 +1,129 @@
 import type { SiteConfig, SiteContent } from "../types";
 
 export const SITE_CONFIG: SiteConfig = {
-  title: "Alejandro Múnez — Mobile & Web Developer",
-  author: "Alejandro Múnez Cuntez",
+  title: "Matthew Paz — Data Analyst & Data Scientist",
+  author: "Matthew Paz",
   description:
-    "Software Engineer based in San Francisco, USA. I specialize in UI design, web and mobile application development and maintenance.",
+    "Data Analyst and Data Scientist based in New York City. I specialize in statistical analysis, data visualization, and machine learning to extract insights and drive business decisions.",
   lang: "en",
-  siteLogo: "/alejandro-small.jpg",
+  siteLogo: "/matthew-small.png",
   navLinks: [
-    { text: "Experience", href: "#experience" },
     { text: "Projects", href: "#projects" },
+    { text: "Experience", href: "#experience" },
+    { text: "Education", href: "#education" },
     { text: "About", href: "#about" },
   ],
   socialLinks: [
-    { text: "Twitter", href: "https://github.com/immois/astro-zen" },
-    { text: "LinkedIn", href: "https://github.com/immois/astro-zen" },
-    { text: "Github", href: "https://github.com/immois/astro-zen" },
-    { text: "Youtube", href: "https://github.com/immois/astro-zen" },
-    { text: "Dribbble", href: "https://github.com/immois/astro-zen" },
+    { text: "LinkedIn", href: "https://www.linkedin.com/in/matthew-paz/" },
+    { text: "Github", href: "https://github.com/mattpaznyc" },
+    { text: "Email", href: "mailto:paz.matthew@me.com" },
   ],
   socialImage: "/zen-og.png",
-  canonicalURL: "https://astro-zen.vercel.app",
+  canonicalURL: "https://mattpaznyc.github.io/matthewp",
 };
 
 export const SITE_CONTENT: SiteContent = {
   hero: {
-    name: "Alejandro Múnez",
-    specialty: "Mobile & Web Developer",
+    name: "Matthew Paz",
+    specialty: "Data Analyst & Data Scientist",
     summary:
-      "Developer based in San Francisco, USA. I specialize in UI design, web and mobile application development and maintenance.",
-    email: "example@email.com",
+      "Data professional based in New York City with a Master’s in Business Analytics with a concentration in Data Analytics. I specialize in data visualization, statistical modeling, and machine learning to uncover insights and support data-driven decisions.",
+    email: "paz.matthew@me.com",
   },
-  experience: [
-    {
-      company: "Zalmart",
-      position: "Lead Android Developer",
-      startDate: "May 2018",
-      endDate: "Sept 2020",
-      summary: [
-        "Implemented advanced memory management and code optimization techniques, resulting in a reduction in application load time by 40% and a decrease in crashes by 25%. This significantly improved user experience and increased user retention by 20%.",
-        "I led a team of developers in building and integrating new features using Jetpack Android components such as LiveData and ViewModel. This enabled us to build scalable and maintainable applications, reducing the crash rate by 20% and speeding up the time to delivery of new features by 15%.",
-        "Integrated Google Pay for in-app purchases, resulting in a 35% increase in mobile transaction revenue. Additionally, implemented Firebase Analytics to gain insights into user behavior, enabling data-driven optimizations and a 30% increase in user retention.",
-      ],
-    },
-    {
-      company: "Bankit",
-      position: "Mobile Developer",
-      startDate: "Feb 2017",
-      endDate: "May 2018",
-      summary: [
-        "I designed and developed a mobile application using Flutter, allowing it to be deployed on both Android and iOS with a single codebase. This reduced development time by 50% and maintenance costs by 30%, facilitating a consistent user experience on both platforms.",
-        "I integrated biometric authentication and data encryption, significantly improving the security of user data. This implementation resulted in a 40% increase in user trust and a 25% reduction in unauthorized access attempts.",
-      ],
-    },
-    {
-      company: "Driveer",
-      position: "Frontend Developer",
-      startDate: "Jun 2015",
-      endDate: "Oct 2016",
-      summary:
-        "Developed and integrated a real-time vehicle tracking system using WebSockets, improving accuracy and data update in the application. This functionality increased user satisfaction by 30% and reduced customer service inquiries by 25%.",
-    },
-  ],
+
+  // Projects now appear first
   projects: [
     {
-      name: "Spotifu Music",
-      summary: "A music streaming app that emulates Spotify's core features.",
-      linkPreview: "/",
-      linkSource: "https://github.com/immois/astro-zen",
-      image: "/spotifu.png",
+      name: "Amazon Review Analysis",
+      summary:
+        "Analyzed over 200,000 Amazon reviews using Python and NLP to classify verified vs. unverified purchases. Applied machine learning and sentiment analysis techniques to uncover behavioral patterns and product perception insights.",
+      linkPreview: "https://github.com/mattpaznyc/review-trust-nlp",
+      linkSource: "https://github.com/mattpaznyc/review-trust-nlp",
+      image: "/project-amazon.png",
     },
     {
-      name: "Shopp App",
-      summary: "An e-commerce platform that replicates Shopify's key features.",
-      linkPreview: "/",
-      linkSource: "https://github.com/immois/astro-zen",
-      image: "/shopify-clon.png",
+      name: "Airbnb Analytics Dashboard",
+      summary:
+        "Developed an interactive dashboard with Streamlit and Plotly to visualize pricing trends, occupancy rates, and neighborhood data. Demonstrated skills in data cleaning, exploratory analysis, and visualization for decision support.",
+      linkPreview: "https://nyc-airbnb-dashboard.streamlit.app",
+      linkSource: "https://nyc-airbnb-dashboard.streamlit.app",
+      image: "/airbnb-dashboard.png",
     },
     {
-      name: "ClonTagram",
-      summary: "A social network that replicates the features of Instagram",
-      linkPreview: "/",
-      linkSource: "https://github.com/immois/astro-zen",
-      image: "/clone-ig.png",
+    name: "Marketing Binary Classification Project",
+    summary:
+      "Built and evaluated binary classification models in R to predict whether consumers would accept or decline marketing offers. Conducted EDA, feature engineering, and model evaluation using precision as the key metric.",
+    linkPreview: "https://github.com/mattpaznyc/Marketing-Classification-M",
+    linkSource: "https://github.com/mattpaznyc/Marketing-Classification-ML",
+    image: "/project-marketing.png",
+  },
+  ],
+
+  experience: [
+    {
+      company: "City University of New York, Baruch College",
+      position: "Graduate Teaching Assistant",
+      startDate: "Aug 2024",
+      endDate: "Jan 2025",
+      summary: [
+        "Assisted instruction in Database Management Systems and Big Data Technologies, focusing on SQL, PySpark, and data modeling.",
+        "Supported students with hands-on data projects, strengthening their analytical and programming skills.",
+        "Enhanced instructional materials with applied examples in distributed data processing and visualization.",
+      ],
+    },
+    {
+      company: "Tayside Group",
+      position: "Researcher — Executive Search",
+      startDate: "Nov 2021",
+      endDate: "Apr 2023",
+      summary: [
+        "Conducted market research using quantitative and qualitative data to support senior-level recruitment projects.",
+        "Leveraged CRM and LinkedIn data to identify candidate trends and optimize sourcing strategies.",
+        "Collaborated with leadership to deliver data-informed insights that improved client placement outcomes.",
+      ],
+    },
+    {
+      company: "Valent, Inc",
+      position: "Recruting Coordinator",
+      startDate: "Aug 2019",
+      endDate: "Nov 2021",
+      summary: [
+        "Conducted market research using quantitative and qualitative data to support senior-level recruitment projects.",
+        "Leveraged CRM and LinkedIn data to identify candidate trends and optimize sourcing strategies.",
+        "Collaborated with leadership to deliver data-informed insights that improved client placement outcomes.",
+      ],
     },
   ],
+
+  education: [
+  {
+    institution: "CUNY Baruch College, Zicklin School of Business",
+    degree: "Master of Science in Business Analytics",
+    year: "2024",
+    details: [
+      "Focused on predictive modeling, data visualization, and big data technologies.",
+      "Completed projects in natural language processing, feature engineering, and dashboard design using Python and Power BI.",
+    ],
+  },
+  {
+    institution: "CUNY Queens College",
+    degree: "Bachelor of Arts in Sociology",
+    year: "2019",
+    details: [
+      "Developed a strong foundation in research methods, quantitative analysis, and behavioral interpretation.",
+      "Explored the intersection of social science and data to understand real-world patterns.",
+    ],
+  },
+],
+
   about: {
     description: `
-      Hi, I’m Alejandro Múnez, a passionate Mobile and Web Developer with a knack for crafting seamless digital experiences. With a strong background in both Android and iOS development, as well as front-end web technologies, I thrive in the intersection where creativity meets technology.
+      Hi, I’m Matthew Paz — a data analyst and data scientist with a passion for transforming complex datasets into meaningful insights. I enjoy exploring how data can explain human behavior, optimize decision-making, and tell stories that matter.
 
-      Over the years, I’ve honed my skills in building robust, user-friendly applications that not only meet the needs of users but also push the boundaries of what’s possible. My projects range from innovative mobile applications to responsive web designs, all with a focus on performance, security, and scalability.
+      With a strong technical foundation in Python, R, SQL, Power BI, Tableau, and Excel, I’ve worked on projects involving text classification, predictive modeling, and interactive dashboards. My background in sociology complements my analytical work by grounding my approach in real-world context and interpretation.
+
+      I’m currently based in New York City and always eager to connect with professionals who share an interest in data analytics, visualization, and applied machine learning.
     `,
-    image: "/alejandro-big.jpg",
+    image: "/matthew-big.png",
   },
 };
-
-// #5755ff
