@@ -6,6 +6,9 @@ dist/
 
 # dependencies
 node_modules/
+dist/
+.vercel/
+.DS_Store
 
 # logs
 npm-debug.log*
@@ -22,3 +25,4 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+.vercel

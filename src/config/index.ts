@@ -1,5 +1,6 @@
 import type { SiteConfig, SiteContent } from "../types";
 
+
 export const SITE_CONFIG: SiteConfig = {
   title: "Matthew Paz — Data Analyst & Data Scientist",
   author: "Matthew Paz",
@@ -53,7 +54,7 @@ export const SITE_CONTENT: SiteContent = {
     name: "Marketing Binary Classification Project",
     summary:
       "Built and evaluated binary classification models in R to predict whether consumers would accept or decline marketing offers. Conducted EDA, feature engineering, and model evaluation using precision as the key metric.",
-    linkPreview: "https://github.com/mattpaznyc/Marketing-Classification-M",
+    linkPreview: "https://github.com/mattpaznyc/Marketing-Classification-ML",
     linkSource: "https://github.com/mattpaznyc/Marketing-Classification-ML",
     image: "/project-marketing.png",
   },
@@ -84,7 +85,7 @@ export const SITE_CONTENT: SiteContent = {
     },
     {
       company: "Valent, Inc",
-      position: "Recruting Coordinator",
+      position: "Recruiting Coordinator",
       startDate: "Aug 2019",
       endDate: "Nov 2021",
       summary: [
