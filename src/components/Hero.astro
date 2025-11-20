@@ -33,33 +33,55 @@ const { name, specialty, summary, email } = Astro.props;
   <!-- View Resume Button (opens modal) -->
   <button
     id="openResume"
-    class="inline-block rounded-full border border-neutral px-8 py-5 text-sm leading-5 font-medium text-neutral hover:bg-neutral hover:text-black transition"
+    class="inline-flex items-center gap-2 rounded-full border border-primary px-8 py-5 text-sm leading-5 font-medium text-primary hover:bg-primary hover:text-white transition"
   >
-    View Resume
+    <span aria-hidden="true">📄</span>
+    <span>View Resume</span>
   </button>
 
   <!-- Modal Overlay -->
   <div
     id="resumeModal"
-    class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden"
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden opacity-0 transition-opacity"
   >
     <!-- Modal Container -->
-    <div class="bg-neutral-900 rounded-xl shadow-xl w-full max-w-4xl h-[85vh] relative">
-      
-      <!-- Close Button -->
-      <button
-        id="closeResume"
-        class="absolute top-4 right-4 text-white text-2xl hover:text-primary transition"
-      >
-        &times;
-      </button>
+    <div
+      id="resumeModalContent"
+      class="bg-neutral-900 rounded-xl shadow-xl w-full max-w-4xl h-[85vh] relative transform scale-95 opacity-0 transition-all"
+    >
+      <!-- Header: Close + Download -->
+      <div class="flex items-center justify-between px-4 pt-4 pb-2 border-b border-neutral-800">
+        <p class="text-sm text-neutral-300">
+          Resume — <span class="font-medium text-white">Matthew Paz</span>
+        </p>
+
+        <div class="flex items-center gap-3">
+          <!-- Download Resume button inside modal -->
+          <a
+            href="/MatthewPaz_Resume.pdf"
+            download="MatthewPaz_Resume.pdf"
+            class="inline-flex items-center gap-2 rounded-full border border-primary px-4 py-2 text-xs font-medium text-primary hover:bg-primary hover:text-white transition"
+          >
+            <span aria-hidden="true">⬇️</span>
+            <span>Download</span>
+          </a>
+
+          <!-- Close Button -->
+          <button
+            id="closeResume"
+            class="text-white text-2xl leading-none hover:text-primary transition"
+            aria-label="Close resume"
+          >
+            &times;
+          </button>
+        </div>
+      </div>
 
       <!-- PDF Viewer -->
       <iframe
         src="/MatthewPaz_Resume.pdf"
-        class="w-full h-full rounded-b-xl"
+        class="w-full h-[calc(100%-3rem)] rounded-b-xl"
       ></iframe>
-
     </div>
   </div>
 
@@ -68,23 +90,60 @@ const { name, specialty, summary, email } = Astro.props;
     const openBtn = document.getElementById("openResume");
     const closeBtn = document.getElementById("closeResume");
     const modal = document.getElementById("resumeModal");
+    const modalContent = document.getElementById("resumeModalContent");
 
-    // Null-safe TypeScript-friendly check
-    if (openBtn && closeBtn && modal) {
+    const openModal = () => {
+      if (!modal || !modalContent) return;
 
-      openBtn.addEventListener("click", () => {
-        modal.classList.remove("hidden");
+      // Show overlay first
+      modal.classList.remove("hidden");
+
+      // Animate in on next frame
+      requestAnimationFrame(() => {
+        modal.classList.remove("opacity-0");
+        modal.classList.add("opacity-100");
+
+        modalContent.classList.remove("opacity-0", "scale-95");
+        modalContent.classList.add("opacity-100", "scale-100");
       });
+    };
 
-      closeBtn.addEventListener("click", () => {
-        modal.classList.add("hidden");
-      });
+    const closeModal = () => {
+      if (!modal || !modalContent) return;
 
+      modal.classList.remove("opacity-100");
+      modal.classList.add("opacity-0");
+
+      modalContent.classList.remove("opacity-100", "scale-100");
+      modalContent.classList.add("opacity-0", "scale-95");
+
+      // Wait for transition, then hide
+      modal.addEventListener(
+        "transitionend",
+        () => {
+          modal.classList.add("hidden");
+        },
+        { once: true }
+      );
+    };
+
+    if (openBtn && closeBtn && modal && modalContent) {
+      openBtn.addEventListener("click", openModal);
+      closeBtn.addEventListener("click", closeModal);
+
+      // Click outside content closes modal
       modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.classList.add("hidden");
+        if (e.target === modal) {
+          closeModal();
+        }
       });
 
+      // ESC key closes modal
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+          closeModal();
+        }
+      });
     }
   </script>
-
 </section>
