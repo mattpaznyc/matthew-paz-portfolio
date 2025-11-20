@@ -69,18 +69,22 @@ const { name, specialty, summary, email } = Astro.props;
     const closeBtn = document.getElementById("closeResume");
     const modal = document.getElementById("resumeModal");
 
-    openBtn.addEventListener("click", () => {
-      modal.classList.remove("hidden");
-    });
+    // Null-safe TypeScript-friendly check
+    if (openBtn && closeBtn && modal) {
 
-    closeBtn.addEventListener("click", () => {
-      modal.classList.add("hidden");
-    });
+      openBtn.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+      });
 
-    // Optional: click outside modal closes it
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) modal.classList.add("hidden");
-    });
+      closeBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.add("hidden");
+      });
+
+    }
   </script>
 
 </section>
