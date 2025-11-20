@@ -11,17 +11,76 @@ const { name, specialty, summary, email } = Astro.props;
   >
     {name}
   </h1>
+
   <p
     class="mb-9 font-serif text-4xl leading-[46px] font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl"
   >
     {specialty}
   </p>
+
   <p class="mb-16 text-base font-normal text-neutral md:text-lg">
     {summary}
   </p>
 
+  <!-- Get in Touch Button -->
   <a
-    class="inline-block rounded-full bg-primary px-8 py-5 text-sm leading-5 font-medium text-[#fff]"
-    href={`mailto:${email}`}>Get in Touch</a
+    href={`mailto:${email}`}
+    class="inline-block rounded-full bg-primary px-8 py-5 text-sm leading-5 font-medium text-white hover:bg-primary/80 transition mr-4"
   >
+    Get in Touch
+  </a>
+
+  <!-- View Resume Button (opens modal) -->
+  <button
+    id="openResume"
+    class="inline-block rounded-full border border-neutral px-8 py-5 text-sm leading-5 font-medium text-neutral hover:bg-neutral hover:text-black transition"
+  >
+    View Resume
+  </button>
+
+  <!-- Modal Overlay -->
+  <div
+    id="resumeModal"
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden"
+  >
+    <!-- Modal Container -->
+    <div class="bg-neutral-900 rounded-xl shadow-xl w-full max-w-4xl h-[85vh] relative">
+      
+      <!-- Close Button -->
+      <button
+        id="closeResume"
+        class="absolute top-4 right-4 text-white text-2xl hover:text-primary transition"
+      >
+        &times;
+      </button>
+
+      <!-- PDF Viewer -->
+      <iframe
+        src="/MatthewPaz_Resume.pdf"
+        class="w-full h-full rounded-b-xl"
+      ></iframe>
+
+    </div>
+  </div>
+
+  <!-- Modal Script -->
+  <script>
+    const openBtn = document.getElementById("openResume");
+    const closeBtn = document.getElementById("closeResume");
+    const modal = document.getElementById("resumeModal");
+
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+
+    // Optional: click outside modal closes it
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.add("hidden");
+    });
+  </script>
+
 </section>
