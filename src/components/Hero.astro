@@ -22,41 +22,46 @@ const { name, specialty, summary, email } = Astro.props;
     {summary}
   </p>
 
-  <!-- Get in Touch Button -->
-  <a
-    href={`mailto:${email}`}
-    class="inline-block rounded-full bg-primary px-8 py-5 text-sm leading-5 font-medium text-white hover:bg-primary/80 transition mr-4"
-  >
-    Get in Touch
-  </a>
+  <!-- BUTTON LAYOUT WRAPPER -->
+  <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-start sm:items-center">
+    
+    <!-- Get in Touch Button -->
+    <a
+      href={`mailto:${email}`}
+      class="rounded-full bg-primary px-8 py-5 text-sm leading-5 font-medium text-white hover:bg-primary/80 transition text-center w-full sm:w-auto"
+    >
+      Get in Touch
+    </a>
 
-  <!-- View Resume Button (opens modal) -->
-  <button
-    id="openResume"
-    class="inline-flex items-center gap-2 rounded-full border border-primary px-8 py-5 text-sm leading-5 font-medium text-primary hover:bg-primary hover:text-white transition"
-  >
-    <span aria-hidden="true">📄</span>
-    <span>View Resume</span>
-  </button>
+    <!-- View Resume Button -->
+    <button
+      id="openResume"
+      class="inline-flex items-center gap-2 rounded-full border border-primary px-8 py-5 text-sm leading-5 font-medium text-primary hover:bg-primary hover:text-white transition text-center w-full sm:w-auto"
+    >
+      <span aria-hidden="true">📄</span>
+      <span>View Resume</span>
+    </button>
+
+  </div>
 
   <!-- Modal Overlay -->
   <div
     id="resumeModal"
-    class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden opacity-0 transition-opacity"
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden opacity-0 transition-opacity duration-200"
   >
     <!-- Modal Container -->
     <div
       id="resumeModalContent"
-      class="bg-neutral-900 rounded-xl shadow-xl w-full max-w-4xl h-[85vh] relative transform scale-95 opacity-0 transition-all"
+      class="bg-neutral-900 rounded-xl shadow-xl w-full max-w-4xl h-[85vh] relative transform scale-95 opacity-0 transition-all duration-200"
     >
-      <!-- Header: Close + Download -->
+      <!-- Header -->
       <div class="flex items-center justify-between px-4 pt-4 pb-2 border-b border-neutral-800">
         <p class="text-sm text-neutral-300">
           Resume — <span class="font-medium text-white">Matthew Paz</span>
         </p>
 
         <div class="flex items-center gap-3">
-          <!-- Download Resume button inside modal -->
+          <!-- Download Resume button -->
           <a
             href="/MatthewPaz_Resume.pdf"
             download="MatthewPaz_Resume.pdf"
@@ -95,10 +100,10 @@ const { name, specialty, summary, email } = Astro.props;
     const openModal = () => {
       if (!modal || !modalContent) return;
 
-      // Show overlay first
+      // Show overlay
       modal.classList.remove("hidden");
 
-      // Animate in on next frame
+      // Animate in (next frame)
       requestAnimationFrame(() => {
         modal.classList.remove("opacity-0");
         modal.classList.add("opacity-100");
@@ -117,7 +122,6 @@ const { name, specialty, summary, email } = Astro.props;
       modalContent.classList.remove("opacity-100", "scale-100");
       modalContent.classList.add("opacity-0", "scale-95");
 
-      // Wait for transition, then hide
       modal.addEventListener(
         "transitionend",
         () => {
@@ -131,14 +135,10 @@ const { name, specialty, summary, email } = Astro.props;
       openBtn.addEventListener("click", openModal);
       closeBtn.addEventListener("click", closeModal);
 
-      // Click outside content closes modal
       modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          closeModal();
-        }
+        if (e.target === modal) closeModal();
       });
 
-      // ESC key closes modal
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && !modal.classList.contains("hidden")) {
           closeModal();
