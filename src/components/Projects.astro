@@ -11,64 +11,218 @@ const { projects } = Astro.props;
 ---
 
 <Section text="Featured Projects" href="projects">
-  {projects.map(({ name, summary, image, linkPreview }) => {
-    // Define tags for each project
+  {projects.map((project) => {
+    const { name, summary, image, linkPreview } = project;
+
+    /* ---------- TAGS PER PROJECT ---------- */
     let tags: string[] = [];
 
     if (name === "Amazon Review Analysis") {
       tags = [
-        "Python",
-        "NLP",
-        "Machine Learning",
-        "Classification",
-        "Data Cleaning",
-        "Sentiment Analysis",
+        "Python", "NLP", "Machine Learning", "Classification",
+        "Sentiment Analysis", "SMOTE", "Feature Engineering"
       ];
-    } else if (name === "Airbnb Analytics Dashboard") {
+    } 
+    else if (name === "Airbnb Analytics Dashboard") {
       tags = [
-        "Python",
-        "Data Visualization",
-        "Streamlit",
-        "Plotly",
-        "Web Application",
-        "EDA",
+        "Python", "Data Visualization", "Streamlit",
+        "Plotly", "Web App", "EDA"
       ];
-    } else if (name === "Marketing Binary Classification Project") {
+    } 
+    else if (name === "Marketing Binary Classification Project") {
       tags = [
-        "R",
-        "Machine Learning",
-        "Classification",
-        "Data Cleaning",
-        "Feature Engineering",
-        "Model Evaluation",
+        "R", "Machine Learning", "Classification",
+        "Feature Engineering", "Model Evaluation"
       ];
     }
 
-    return (
-      <div class="mb-12">
-        {/* Project Card */}
-        <div class="rounded-2xl bg-[#1c232d]/90 shadow-md flex flex-col sm:flex-row md:h-[440px]">
-          <div class="p-8 flex flex-col justify-center flex-1">
-            <h3 class="mb-5 font-serif text-3xl font-medium text-primary">
-              {name}
-            </h3>
-            <p class="text-base text-neutral mb-6">{summary}</p>
+    const isNLP = name === "Amazon Review Analysis";
+    const isMarketing = name === "Marketing Binary Classification Project";
+    const isAirbnb = name === "Airbnb Analytics Dashboard";
 
-            {/* Preview link */}
-            <div class="flex gap-6 text-white">
+    return (
+      <div class="mb-16">
+
+        { /* ============================================================
+             ⭐️ AMAZON NLP PROJECT (CUSTOM CARD)
+             ============================================================ */ }
+        {isNLP && (
+          <div class="bg-neutral-900 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all">
+
+            <h3 class="text-3xl font-semibold text-white mb-4">
+              Amazon Review Authenticity Classifier (NLP + ML)
+            </h3>
+
+            <p class="text-neutral-300 mb-6 text-base leading-relaxed">
+              {summary}
+            </p>
+
+            <ul class="list-disc list-inside text-neutral-400 text-sm mb-6 space-y-1">
+              <li>Processed 200,000+ Amazon reviews via stratified sampling</li>
+              <li>Engineered 70+ linguistic & structural features</li>
+              <li>Balanced 96/4 class distribution using SMOTE (0.5 strategy)</li>
+              <li>Random Forest achieved <strong>86% accuracy</strong> and <strong>PR-AUC 0.86</strong></li>
+            </ul>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+              {tags.map(tag => (
+                <span class="px-3 py-1 text-sm bg-neutral-800 text-neutral-300 rounded-full border border-neutral-700">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div class="flex gap-4 mb-6">
               <a
-                href={linkPreview}
+                href="https://github.com/mattpaznyc/review-trust-nlp"
                 target="_blank"
-                class="hover:underline after:relative after:bottom-[-5px] after:content-[url(/external.svg)]"
+                class="rounded-full border border-primary px-5 py-2 text-sm text-primary hover:bg-primary hover:text-white transition"
               >
-                View
+                View Code
               </a>
             </div>
-          </div>
 
-          {/* Only Airbnb project shows an image */}
-          {name === "Airbnb Analytics Dashboard" && (
-            <div class="flex items-center justify-center flex-1 p-4">
+            <details class="mt-3">
+              <summary class="cursor-pointer text-primary font-medium">Technical Deep Dive</summary>
+
+              <div class="mt-4 text-neutral-300 text-sm space-y-3 leading-relaxed">
+                <p><strong>Business Problem:</strong> Fake reviews influence $152B in online spending. Classifying verified vs. unverified reviews supports e-commerce trust.</p>
+
+                <p><strong>Dataset:</strong> 200,000+ reviews from McAuley Lab (Appliances category), stratified sample with ±0.15% variance.</p>
+
+                <p><strong>NLP Features (71% of all features):</strong></p>
+                <ul class="list-disc list-inside text-neutral-400 space-y-1">
+                  <li>POS tagging (nouns, verbs, adjectives)</li>
+                  <li>Sentiment polarity & subjectivity</li>
+                  <li>NER for product/brand mentions</li>
+                  <li>Uppercase counts, length, title complexity</li>
+                </ul>
+
+                <p><strong>Imbalance Handling:</strong> SMOTE (0.5 sampling) increased minority class by 1052%.</p>
+
+                <p><strong>Model Performance:</strong></p>
+                <ul class="list-disc list-inside text-neutral-400 space-y-1">
+                  <li><strong>Random Forest</strong>: 86% accuracy, PR-AUC 0.86</li>
+                  <li><strong>Decision Tree</strong>: 83% accuracy</li>
+                  <li><strong>Logistic Regression</strong>: 70% accuracy</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        )}
+
+        { /* ============================================================
+             ⭐️ MARKETING CLASSIFICATION PROJECT (R)
+             ============================================================ */ }
+        {isMarketing && (
+          <div class="bg-neutral-900 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all">
+
+            <h3 class="text-3xl font-semibold text-white mb-4">
+              Marketing Campaign Binary Classification (R + ML)
+            </h3>
+
+            <p class="text-neutral-300 mb-6 text-base leading-relaxed">
+              {summary}
+            </p>
+
+            <ul class="list-disc list-inside text-neutral-400 text-sm mb-6 space-y-1">
+              <li>Processed 2,208 rows with 21 engineered features</li>
+              <li>Performed extensive data cleaning (outliers, missing values, duplicates)</li>
+              <li>Oversampled minority class by <strong>239.58%</strong></li>
+              <li><strong>SVM achieved the best performance</strong> with precision 0.85</li>
+            </ul>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+              {tags.map(tag => (
+                <span class="px-3 py-1 text-sm bg-neutral-800 text-neutral-300 rounded-full border border-neutral-700">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div class="flex gap-4 mb-6">
+              <a
+                href="https://github.com/mattpaznyc/marketing-classification-r"
+                target="_blank"
+                class="rounded-full border border-primary px-5 py-2 text-sm text-primary hover:bg-primary hover:text-white transition"
+              >
+                View Code
+              </a>
+            </div>
+
+            <details class="mt-3">
+              <summary class="cursor-pointer text-primary font-medium">Technical Deep Dive</summary>
+
+              <div class="mt-4 text-neutral-300 text-sm space-y-3 leading-relaxed">
+                <p><strong>Dataset:</strong> 2,208 customer entries with demographics, spending habits, and campaign history.</p>
+
+                <p><strong>Feature Engineering:</strong> Categorical reduction (marital status, education), product aggregations, Total Dependents feature, encoding of 3 categorical variables.</p>
+
+                <p><strong>Imbalanced Learning:</strong> Oversampling minority class (239.58% increase).</p>
+
+                <p><strong>Modeling:</strong></p>
+                <ul class="list-disc list-inside text-neutral-400 space-y-1">
+                  <li><strong>SVM</strong>: Best performer (highest precision & balanced CM)</li>
+                  <li><strong>Logistic Regression</strong>: Strong baseline</li>
+                  <li><strong>Naive Bayes</strong>: Moderate performance</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        )}
+
+        { /* ============================================================
+             ⭐️ AIRBNB DASHBOARD (WITH IMAGE)
+             ============================================================ */ }
+        {isAirbnb && (
+          <div class="rounded-2xl bg-neutral-900 shadow-lg hover:shadow-xl transition-all p-8 mb-16 flex flex-col md:flex-row">
+
+            <!-- TEXT -->
+            <div class="flex-1 flex flex-col justify-center md:pr-8">
+
+              <h3 class="text-3xl font-semibold text-white mb-4">
+                NYC Airbnb Analytics Dashboard (Python + Streamlit)
+              </h3>
+
+              <p class="text-neutral-300 mb-6 text-base leading-relaxed">
+                {summary}
+              </p>
+
+              <ul class="list-disc list-inside text-neutral-400 text-sm mb-6 space-y-1">
+                <li>Interactive borough & neighborhood drilldowns (NYC 2019 dataset)</li>
+                <li>Price distribution, room type mix, and review trends with Plotly</li>
+                <li>Geospatial map colored by room type and sized by price</li>
+                <li>Built entirely in Python using Streamlit</li>
+              </ul>
+
+              <div class="flex flex-wrap gap-2 mb-6">
+                {tags.map(tag => (
+                  <span class="px-3 py-1 text-sm bg-neutral-800 text-neutral-300 rounded-full border border-neutral-700">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div class="flex gap-4 mb-6">
+                <a
+                  href={linkPreview}
+                  target="_blank"
+                  class="rounded-full bg-primary px-5 py-2 text-sm text-white hover:bg-primary/80 transition"
+                >
+                  Live Demo
+                </a>
+                <a
+                  href="https://github.com/mattpaznyc/airbnb-nyc-dashboard"
+                  target="_blank"
+                  class="rounded-full border border-primary px-5 py-2 text-sm text-primary hover:bg-primary hover:text-white transition"
+                >
+                  View Code
+                </a>
+              </div>
+            </div>
+
+            <!-- IMAGE -->
+            <div class="flex items-center justify-center flex-1 mt-8 md:mt-0">
               <Image
                 class="h-auto w-full max-w-[500px] rounded-xl object-contain"
                 src={image}
@@ -77,17 +231,10 @@ const { projects } = Astro.props;
                 height="483"
               />
             </div>
-          )}
-        </div>
 
-        {/* Tags BELOW each card */}
-        <div class="flex flex-wrap gap-2 mt-4 ml-2">
-          {tags.map((tag) => (
-            <span class="px-3 py-1 text-sm bg-[#2a3340] text-white/80 rounded-full border border-neutral/20">
-              {tag}
-            </span>
-          ))}
-        </div>
+          </div>
+        )}
+
       </div>
     );
   })}
