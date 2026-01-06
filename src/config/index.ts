@@ -26,7 +26,7 @@ export const SITE_CONFIG: SiteConfig = {
 export const SITE_CONTENT: SiteContent = {
   hero: {
     name: "Matthew Paz",
-    specialty: "Data Analyst & Data Scientist",
+    specialty: "Data Analyst",
     summary:
       "Data professional based in New York City with a Master’s in Business Analytics with a concentration in Data Analytics. I specialize in data visualization, statistical modeling, and machine learning to uncover insights and support data-driven decisions.",
     email: "paz.matthew@me.com",
@@ -74,7 +74,7 @@ export const SITE_CONTENT: SiteContent = {
     },
     {
       company: "Tayside Group",
-      position: "Researcher — Executive Search",
+      position: "Research Analyst",
       startDate: "Nov 2021",
       endDate: "Apr 2023",
       summary: [
